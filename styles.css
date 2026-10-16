@@ -1,0 +1,346 @@
+/* =========================================================================
+   styles.css — Estilos sencillos de la PWA "Gestión de Usuarios"
+   ========================================================================= */
+
+:root {
+  --azul: #1d4ed8;
+  --azul-oscuro: #1e3a8a;
+  --verde: #15803d;
+  --verde-claro: #dcfce7;
+  --rojo: #b91c1c;
+  --rojo-claro: #fee2e2;
+  --ambar: #b45309;
+  --ambar-claro: #fef3c7;
+  --gris: #64748b;
+  --borde: #e2e8f0;
+  --fondo: #f1f5f9;
+  --texto: #0f172a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
+  line-height: 1.5;
+}
+
+/* ---------------------------- Encabezado ---------------------------- */
+.encabezado {
+  background: var(--azul);
+  color: #fff;
+  padding: 1.5rem 1rem 1.75rem;
+  text-align: center;
+}
+
+.encabezado h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+.subtitulo {
+  margin: 0.35rem 0 1rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* Indicador de conexión */
+.indicador {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid transparent;
+}
+
+.indicador .punto {
+  font-size: 1.1rem;
+}
+
+.indicador.conectado {
+  background: var(--verde-claro);
+  color: var(--verde);
+  border-color: var(--verde);
+}
+
+.indicador.sin-conexion {
+  background: var(--rojo-claro);
+  color: var(--rojo);
+  border-color: var(--rojo);
+}
+
+/* ---------------------------- Contenido ---------------------------- */
+.contenido {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2rem;
+}
+
+.tarjeta {
+  background: #fff;
+  border: 1px solid var(--borde);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+}
+
+.tarjeta h2 {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  color: var(--azul-oscuro);
+}
+
+/* ---------------------------- Mensajes ----------------------------- */
+.mensaje {
+  margin: 0 0 1.25rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border-left: 5px solid var(--gris);
+  background: #fff;
+  font-size: 0.95rem;
+}
+
+.mensaje.exito {
+  border-color: var(--verde);
+  background: var(--verde-claro);
+  color: var(--verde);
+}
+
+.mensaje.error {
+  border-color: var(--rojo);
+  background: var(--rojo-claro);
+  color: var(--rojo);
+}
+
+.mensaje.aviso {
+  border-color: var(--ambar);
+  background: var(--ambar-claro);
+  color: var(--ambar);
+}
+
+.mensaje.info {
+  border-color: var(--azul);
+  background: #dbeafe;
+  color: var(--azul-oscuro);
+}
+
+/* ---------------------------- Formulario ---------------------------- */
+.campo {
+  margin-bottom: 1rem;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.obligatorio {
+  color: var(--rojo);
+}
+
+.campo input {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border: 2px solid var(--borde);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: inherit;
+  background: #fff;
+  color: var(--texto);
+}
+
+.campo input:focus {
+  outline: 2px solid var(--azul);
+  outline-offset: 1px;
+  border-color: var(--azul);
+}
+
+/* aria-invalid="true" se ve en rojo automáticamente */
+.campo input[aria-invalid="true"] {
+  border-color: var(--rojo);
+  background: #fff5f5;
+}
+
+.pista {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--gris);
+}
+
+.error {
+  margin: 0.3rem 0 0;
+  font-size: 0.83rem;
+  color: var(--rojo);
+  font-weight: 600;
+  min-height: 1rem;
+}
+
+.error:empty {
+  min-height: 0;
+}
+
+/* ---------------------------- Botones ------------------------------ */
+.boton {
+  padding: 0.65rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.boton-primario {
+  background: var(--azul);
+  color: #fff;
+  width: 100%;
+}
+
+.boton-primario:hover {
+  background: var(--azul-oscuro);
+}
+
+.boton-secundario {
+  background: #fff;
+  color: var(--azul);
+  border: 2px solid var(--azul);
+}
+
+.boton-secundario:hover {
+  background: #eff6ff;
+}
+
+.boton:focus-visible {
+  outline: 3px solid #f59e0b;
+  outline-offset: 2px;
+}
+
+.boton[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ---------------------------- Información --------------------------- */
+.datos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.15rem;
+  margin: 0 0 1rem;
+}
+
+.datos dt {
+  font-size: 0.82rem;
+  color: var(--gris);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.datos dd {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.contador {
+  margin: -0.5rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--gris);
+}
+
+/* ---------------------------- Lista -------------------------------- */
+.lista-usuarios {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+.tarjeta-usuario {
+  border: 1px solid var(--borde);
+  border-left: 5px solid var(--verde);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  background: #fff;
+}
+
+.tarjeta-usuario.pendiente {
+  border-left-color: var(--ambar);
+  background: #fffdf5;
+}
+
+.tarjeta-usuario h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.05rem;
+  color: var(--azul-oscuro);
+}
+
+.dato {
+  margin: 0.15rem 0;
+  font-size: 0.88rem;
+  word-break: break-word;
+}
+
+.dato .etiqueta {
+  color: var(--gris);
+  font-weight: 600;
+}
+
+.estado {
+  display: inline-block;
+  margin-top: 0.6rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.estado-sincronizado {
+  background: var(--verde-claro);
+  color: var(--verde);
+}
+
+.estado-pendiente {
+  background: var(--ambar-claro);
+  color: var(--ambar);
+}
+
+.vacio {
+  color: var(--gris);
+  font-style: italic;
+}
+
+/* ---------------------------- Pie ---------------------------------- */
+.pie {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+  color: var(--gris);
+}
+
+/* ---------------------------- Responsive ---------------------------- */
+@media (max-width: 480px) {
+  .lista-usuarios {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Respeta la preferencia de reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

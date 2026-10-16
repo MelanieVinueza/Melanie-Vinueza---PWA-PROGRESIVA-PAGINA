@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PWA de práctica: gestión de usuarios con IndexedDB, Service Worker y sincronización offline." />
+  <meta name="theme-color" content="#1d4ed8" />
+  <title>Gestión de Usuarios</title>
+
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231d4ed8'/%3E%3Ccircle cx='50' cy='38' r='17' fill='white'/%3E%3Cpath d='M22 84c0-16 13-25 28-25s28 9 28 25z' fill='white'/%3E%3C/svg%3E" />
+</head>
+<body>
+
+  <!-- ======================= ENCABEZADO ======================= -->
+  <header class="encabezado">
+    <h1>Gestión de Usuarios</h1>
+    <p class="subtitulo">PWA · Funcionamiento sin conexión con IndexedDB y Service Worker</p>
+
+    <!-- role="status" + aria-live: el cambio de estado se anuncia a lectores de pantalla -->
+    <div id="indicador-conexion" class="indicador conexion" role="status" aria-live="polite">
+      <span id="punto-estado" class="punto" aria-hidden="true">●</span>
+      <span id="texto-estado">Conectado</span>
+    </div>
+  </header>
+
+  <main class="contenido">
+
+    <!-- Mensaje general de la aplicación (aria-live para que se anuncie) -->
+    <p id="mensaje" class="mensaje" role="status" aria-live="polite">Iniciando la aplicación…</p>
+
+    <!-- ======================= FORMULARIO ======================= -->
+    <section class="tarjeta" aria-labelledby="titulo-formulario">
+      <h2 id="titulo-formulario">Registrar usuario</h2>
+
+      <!-- novalidate: la validación se hace con JavaScript para poder mostrarla con ARIA -->
+      <form id="form-usuario" novalidate>
+
+        <div class="campo">
+          <label for="nombre">Nombre <span class="obligatorio" aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            autocomplete="name"
+            required
+            aria-required="true"
+            aria-invalid="false"
+            aria-describedby="error-nombre" />
+          <p id="error-nombre" class="error" aria-live="polite"></p>
+        </div>
+
+        <div class="campo">
+          <label for="usuario">Usuario <span class="obligatorio" aria-hidden="true">*</span></label>
+          <input
+            type="text"
+            id="usuario"
+            name="usuario"
+            autocomplete="username"
+            required
+            aria-required="true"
+            aria-invalid="false"
+            aria-describedby="error-usuario" />
+          <p id="error-usuario" class="error" aria-live="polite"></p>
+        </div>
+
+        <div class="campo">
+          <label for="correo">Correo <span class="obligatorio" aria-hidden="true">*</span></label>
+          <input
+            type="email"
+            id="correo"
+            name="correo"
+            autocomplete="email"
+            required
+            aria-required="true"
+            aria-invalid="false"
+            aria-describedby="error-correo" />
+          <p id="error-correo" class="error" aria-live="polite"></p>
+        </div>
+
+        <div class="campo">
+          <label for="telefono">Teléfono <span class="obligatorio" aria-hidden="true">*</span></label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            inputmode="numeric"
+            autocomplete="tel"
+            required
+            aria-required="true"
+            aria-invalid="false"
+            aria-describedby="pista-telefono error-telefono" />
+          <p id="pista-telefono" class="pista">Debe tener exactamente 10 dígitos.</p>
+          <p id="error-telefono" class="error" aria-live="polite"></p>
+        </div>
+
+        <button type="submit" id="btn-guardar" class="boton boton-primario">Guardar usuario</button>
+      </form>
+    </section>
+
+    <!-- ======================= INFORMACIÓN ======================= -->
+    <section class="tarjeta" aria-labelledby="titulo-informacion">
+      <h2 id="titulo-informacion">Información</h2>
+
+      <dl class="datos">
+        <dt>Estado de conexión</dt>
+        <dd id="info-conexion">Conectado</dd>
+
+        <dt>Usuarios almacenados localmente</dt>
+        <dd id="info-total">0</dd>
+
+        <dt>Registros pendientes</dt>
+        <dd id="info-pendientes">0</dd>
+
+        <dt>Última sincronización</dt>
+        <dd id="info-ultima">Nunca</dd>
+      </dl>
+
+      <button type="button" id="btn-sincronizar" class="boton boton-secundario">Sincronizar ahora</button>
+    </section>
+
+    <!-- ======================= LISTA ======================= -->
+    <section class="tarjeta" aria-labelledby="titulo-lista">
+      <h2 id="titulo-lista">Usuarios</h2>
+      <p id="contador-usuarios" class="contador">0 usuarios</p>
+
+      <!-- La lista se completa con JavaScript (DOM) -->
+      <ul id="lista-usuarios" class="lista-usuarios"></ul>
+
+      <p id="lista-vacia" class="vacio" hidden>No hay usuarios para mostrar.</p>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <p>Práctica de Desarrollo de Plataformas · API: jsonplaceholder.typicode.com</p>
+  </footer>
+
+  <!-- db.js debe cargarse primero: app.js usa el objeto global DB -->
+  <script src="db.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

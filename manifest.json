@@ -1,0 +1,20 @@
+{
+  "name": "Gestión de Usuarios (PWA)",
+  "short_name": "Usuarios",
+  "description": "PWA de práctica: usuarios con IndexedDB, Service Worker y sincronización offline.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f1f5f9",
+  "theme_color": "#1d4ed8",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%231d4ed8'/%3E%3Ccircle cx='256' cy='190' r='86' fill='white'/%3E%3Cpath d='M110 430c0-78 65-124 146-124s146 46 146 124z' fill='white'/%3E%3C/svg%3E",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
